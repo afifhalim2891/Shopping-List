@@ -2,6 +2,21 @@ const form = document.getElementById("item-form");
 const listItem = document.getElementById("item-list");
 const input = document.getElementById("item-input");
 const clearBtn = document.getElementById("clear");
+const filterInput = document.getElementById("filter");
+
+const checkUI = () => {
+  const listOfItems = listItem.querySelectorAll("li");
+
+  if (listOfItems.length === 0) {
+    filterInput.style.display = "none";
+    clearBtn.style.display = "none";
+  } else {
+    filterInput.style.display = "block";
+    clearBtn.style.display = "block";
+  }
+};
+
+checkUI();
 
 const createBtn = (classes) => {
   const button = document.createElement("button");
@@ -40,17 +55,27 @@ const addItem = (event) => {
   listItem.appendChild(li);
 
   input.value = "";
+
+  checkUI();
 };
 
 const deleteItem = (event) => {
   if (event.target.parentElement.classList.contains("remove-item")) {
-    event.target.parentElement.parentElement.remove();
+    if (confirm("Are you sure?")) {
+      event.target.parentElement.parentElement.remove();
+    }
   }
+
+  checkUI();
 };
 
 const clearItems = () => {
-  while (listItem.firstChild) {
-    listItem.firstChild.remove();
+  if (confirm("Are you sure want to delete all the items?")) {
+    while (listItem.firstChild) {
+      listItem.firstChild.remove();
+    }
+
+    checkUI();
   }
 };
 
