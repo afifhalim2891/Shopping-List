@@ -4,6 +4,8 @@
 
 ### Notably Code Reference
 - DOM Manipulation
+- Create Element
+- Insert Element
 - Handle Re-rendering Manually
 
 ### Tech
